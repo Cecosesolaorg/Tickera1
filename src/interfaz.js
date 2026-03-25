@@ -82,12 +82,15 @@ function initPresets(type = 'fruit') {
     if (type === 'fruit') {
         products = PRESET_PRODUCTS;
         titleContent = 'Productos de Frutería';
+        isCharcuteriaMode = false;
     } else if (type === 'pet') {
         products = PET_PRODUCTS;
         titleContent = 'Productos para Mascotas';
+        isCharcuteriaMode = false;
     } else if (type === 'char' || type === 'charcuteria') {
         products = CHARCUTERIA_PRODUCTS;
         titleContent = 'Productos de Charcutería';
+        isCharcuteriaMode = true;
     }
 
     if (title) title.textContent = titleContent;
@@ -112,6 +115,7 @@ function populateCharcuteria() {
         price: '0.00',
         isManual: true
     }));
+    isCharcuteriaMode = true;
     renderGrid();
 }
 

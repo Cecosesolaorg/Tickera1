@@ -157,23 +157,41 @@ function printSingle(id) {
 
 function buildTicketHtml(card, today, feriaHandle) {
     var fontSize = '3.5rem';
-    if (card.name.length > 15) fontSize = '3rem';
-    if (card.name.length > 25) fontSize = '2.5rem';
-    if (card.name.length > 35) fontSize = '2rem';
+    var priceSize = '7.5rem';
+    
+    if (isCharcuteriaMode) {
+        fontSize = '1.5rem';
+        priceSize = '9.5rem';
+    } else {
+        if (card.name.length > 15) fontSize = '3rem';
+        if (card.name.length > 25) fontSize = '2.5rem';
+        if (card.name.length > 35) fontSize = '2rem';
+    }
 
     var h = '';
     h += '<div style="width:100%;color:black;text-align:center;display:table;margin:0;padding:0;border:none;height:80mm;page-break-after:always;">';
     h += '<div style="display:table-cell;vertical-align:middle;text-align:center;padding:5mm 8mm;">';
-    h += '<div style="text-align:center;margin-bottom:2mm;">';
-    h += '<div style="font-family:Montserrat,sans-serif;font-size:1.1rem;font-weight:700;color:black;line-height:1.3;">' + today + '</div>';
-    h += '<div style="font-family:Montserrat,sans-serif;font-size:1.1rem;font-weight:700;color:black;line-height:1.3;">' + feriaHandle + '</div>';
-    h += '</div>';
+    
+    // Hide header (date and handle) for Charcuteria
+    if (!isCharcuteriaMode) {
+        h += '<div style="text-align:center;margin-bottom:2mm;">';
+        h += '<div style="font-family:Montserrat,sans-serif;font-size:1.1rem;font-weight:700;color:black;line-height:1.3;">' + today + '</div>';
+        h += '<div style="font-family:Montserrat,sans-serif;font-size:1.1rem;font-weight:700;color:black;line-height:1.3;">' + feriaHandle + '</div>';
+        h += '</div>';
+    }
+
     h += '<div style="font-family:Montserrat,sans-serif;font-size:' + fontSize + ';font-weight:900;color:black;text-align:center;line-height:1.1;text-transform:uppercase;margin-bottom:2mm;">' + card.name + '</div>';
+    
     h += '<div style="text-align:center;">';
     h += '<span style="font-family:Montserrat,sans-serif;font-size:2.5rem;font-weight:900;color:black;vertical-align:baseline;">Bs</span>';
-    h += '<span style="font-family:Montserrat,sans-serif;font-size:7.5rem;font-weight:900;color:black;line-height:0.9;"> ' + card.price + '</span>';
+    h += '<span style="font-family:Montserrat,sans-serif;font-size:' + priceSize + ';font-weight:900;color:black;line-height:0.9;"> ' + card.price + '</span>';
     h += '</div>';
-    h += '<div style="font-family:Montserrat,sans-serif;font-size:1.6rem;font-weight:900;color:black;font-style:italic;text-align:center;margin-top:4mm;">¡Gracias por tu visita! Que tengas un excelente día.</div>';
+    
+    // Hide footer message for Charcuteria
+    if (!isCharcuteriaMode) {
+        h += '<div style="font-family:Montserrat,sans-serif;font-size:1.6rem;font-weight:900;color:black;font-style:italic;text-align:center;margin-top:4mm;">¡Gracias por tu visita! Que tengas un excelente día.</div>';
+    }
+    
     h += '</div>';
     h += '</div>';
     return h;

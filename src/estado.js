@@ -9,6 +9,7 @@ let nextManualId = 10000;
 let nextExcelId = 1;
 let tasaBCV = localStorage.getItem('tasaBCV') || 0;
 let bcvHistory = JSON.parse(localStorage.getItem('bcvHistory') || '[]');
+let isCharcuteriaMode = window.location.pathname.includes('charcuteria.html');
 
 // DOM Elements
 const priceGrid = document.getElementById('price-grid');
